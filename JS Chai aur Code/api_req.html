@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>http request</title>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+    }
+
+    .topic {
+        text-align: center;
+        font-size: 50px;
+        margin-top: 20px;
+    }
+
+    img {
+        border-radius: 50%;
+    }
+
+    .content {
+        text-align: center;
+        margin: 50px auto;
+        width: 40%;
+    }
+
+    h1,
+    h2,
+    a {
+        margin: 15px 0;
+    }
+</style>
+
+<body>
+    <p class="topic">Content From Github API</p>
+    <div class="content">
+        <img src="" alt="Github ProfileImg">
+        <h1></h1>
+        <h2></h2>
+        <a href="">Visit Github Profile</a>
+    </div>
+
+</body>
+<script>
+    let req_url = "https://api.github.com/users/AbdulMoizAbbasi496"
+
+    // ✅USING XMLHttpRequest()
+
+    // const request = new XMLHttpRequest()
+    // request.open('GET', req_url)
+    // request.onreadystatechange = function () {
+    //     // console.log(request.readyState);
+    //     if (request.readyState === 4) {
+    //         const data = JSON.parse(this.responseText)
+    //         document.querySelector('img').src = data.avatar_url
+    //         document.querySelector('h1').innerHTML += `${data.name}`;
+    //         document.querySelector('h2').innerHTML += `${data.bio}`;
+    //         document.querySelector('a').href = `${data.html_url}`;
+    //     }
+    //     // console.log("HERE");
+    // }
+    // request.send()
+
+    // ✅USING fetch()
+
+    fetch(req_url).then((response) => {
+        const data = response.json()
+        return data
+    }).then((data) => {
+        document.querySelector('img').src = data.avatar_url
+        document.querySelector('h1').innerHTML += `${data.name}`;
+        document.querySelector('h2').innerHTML += `${data.bio}`;
+        document.querySelector('a').href = `${data.html_url}`;
+    })
+
+</script>
+
+</html>

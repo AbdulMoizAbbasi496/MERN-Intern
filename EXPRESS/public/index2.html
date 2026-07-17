@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD API Test</title>
+</head>
+<body style="font-family:sans-serif; text-align:center;">
+    <h1>Student CRUD Operations</h1>
+
+    <button onclick="getStudents()">GET All Students</button>
+    <pre id="result"></pre>
+
+    <h3>Add Student</h3>
+    <input type="text" id="add-name" placeholder="Student Name">
+    <button onclick="addStudent()">Add</button>
+
+    <h3>Update Student</h3>
+    <input type="number" id="update-id" placeholder="Student ID">
+    <input type="text" id="update-name" placeholder="New Name">
+    <button onclick="updateStudent()">Update</button>
+
+    <h3>Delete Student</h3>
+    <input type="number" id="delete-id" placeholder="Student ID">
+    <button onclick="deleteStudent()">Delete</button>
+
+    <script>
+        async function getStudents() {
+            const res = await fetch('/api/students');
+            const data = await res.json();
+            document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+        }
+
+        async function addStudent() {
+            const name = document.getElementById('add-name').value;
+            const res = await fetch('/api/students', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name })
+            });
+            const data = await res.json();
+            getStudents(); // refresh list
+        }
+
+        async function updateStudent() {
+            const id = document.getElementById('update-id').value;
+            const name = document.getElementById('update-name').value;
+            const res = await fetch(`/api/students/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name })
+            });
+            getStudents();
+        }
+
+        async function deleteStudent() {
+            const id = document.getElementById('delete-id').value;
+            const res = await fetch(`/api/students/${id}`, { method: 'DELETE' });
+            getStudents();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration App</title>
+</head>
+
+<body style="font-family:sans-serif; text-align:center;">
+    <h1>Student Registration App</h1>
+
+    <button onclick="getStudents()">GET All Students</button>
+    <pre id="result">
+        <table>
+            <thead>
+        <tr>
+            <th>Name</th>
+            <th>Department</th>
+            <th>reg_no</th>
+        </tr>
+        </thead>
+        <tbody id="info">
+        
+        </tbody>
+        </table>
+    </pre>
+
+    <h2>Fill the form to Add Student</h2>
+    <form action="/api/students" method="POST">
+        <label for="name">Name</label>
+        <input type="text" id="add-name" required name="name" placeholder="Student Name">
+        <label for="department">Department</label>
+        <input type="text" id="add-dep" required name="department" placeholder="Student Department">
+        <label for="reg_no">Name</label>
+        <input type="text" id="add-reg" required name="reg_no" placeholder="Student reg_no">
+        <!-- <button type="submit" onclick="addStudent()">Add</button> -->
+        <button type="submit">Add</button>
+    </form>
+    
+    
+
+    <!-- <h3>Update Student</h3>
+    <input type="number" id="update-id" placeholder="Student ID">
+    <input type="text" id="update-name" placeholder="New Name">
+    <button onclick="updateStudent()">Update</button>
+
+    <h3>Delete Student</h3>
+    <input type="number" id="delete-id" placeholder="Student ID">
+    <button onclick="deleteStudent()">Delete</button> -->
+
+    <script>
+        async function getStudents() {
+            const res = await fetch('/api/students');
+            const data = await res.json();
+            let info = ''
+            data.forEach(student => {
+                
+                info+= `<tr >
+                <td>${student.name}</td>
+                <td>${student.department}</td>
+                <td>${student["reg_no"]}</td>
+                </tr>`
+            });
+            document.getElementById('info').innerHTML = info
+        }
+
+        async function addStudent() {
+            const name = document.getElementById('add-name').value;
+            const department = document.getElementById('add-dep').value;
+            const reg_no = document.getElementById('add-reg').value;
+            const res = await fetch('/api/students', {
+                method: 'POST',
+                'Content-Type':'application/json',
+                // body: JSON.stringify({ name:name,department:department,reg_no:reg_no })
+                // body: { name:name,department:department,reg_no:reg_no }
+                // body: JSON.stringify({ name,department,reg_no })
+                body: JSON.stringify({name ,department,reg_no})
+            });
+            // const data = await res.json();
+            getStudents(); // refresh list
+        }
+
+        async function updateStudent() {
+            const id = document.getElementById('update-id').value;
+            const name = document.getElementById('update-name').value;
+            const res = await fetch(`/api/students/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name })
+            });
+            getStudents();
+        }
+
+        async function deleteStudent() {
+            const id = document.getElementById('delete-id').value;
+            const res = await fetch(`/api/students/${id}`, { method: 'DELETE' });
+            getStudents();
+        }
+    </script>
+</body>
+
+</html>

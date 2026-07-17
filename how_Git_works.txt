@@ -1,0 +1,23 @@
+git log --oneline -> saved checkpoints details
+git status -s -> files tracking details (which file at which satge -> untracked, added , modified, etc)
+
+cmd -> rmdir /s /q .git --> deletes hidden .git and stop all git process (must be run on CMD)
+git branch feature/navbar
+git switch main
+git merge feature/navbar
+git branch -d feature/navbar <--- Deletes the branch (after merging that branch to main, it should be deleted)
+[git stash, git stash apply, git satsh clear]
+
+---collaboration---
+git clone https://github.com/reponame.git
+git switch -C feature/add_about_page ->creates brach and switch to it
+git branch -> show all branches , with * as active branch
+(feature/add_about_page) git add->commit-> push -u origin feature/add_about_page
+
+git fetch -> fetch all new branches
+(main) git merge feature/add_about_page
+git add .
+git push -u origin main
+
+git pull == git fetch + git merge -> means git pull will get new branches and merges them to main (central code base)
+

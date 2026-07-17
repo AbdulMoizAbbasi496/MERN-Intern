@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+</head>
+<style>
+    .html{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        font-family: sans-serif;
+        color: white;
+    }
+    .main{
+        height: 700px;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #212121;
+    }
+    .clock,.date{
+        width: 180px;
+        background: rgba(241, 241, 80, 0.874);
+        border: 2px solid black;
+        border-radius: 8px;
+        padding: 25px 10px;
+        font-weight: bold;
+        font-size: 20px;
+        text-align: center;
+        color:blue;
+    }
+</style>
+<body>
+    <div class="main">
+        <h2>Current Time</h2>
+        <div class="clock"></div>
+        <h2>Current Date</h2>
+        <div class="date"></div>
+    </div>
+</body>
+<script>
+    const clock = document.querySelector(".clock")
+    const date = document.querySelector(".date")
+    setInterval(()=>{
+        let dt = new Date();
+        time = dt.toLocaleTimeString()        
+        clock.innerHTML= time
+        date.innerHTML = dt.toLocaleDateString()
+    },1000)
+</script>
+</html>

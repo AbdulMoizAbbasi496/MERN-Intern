@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding DOM (Document Object Model)</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+
+    }
+
+    html {
+        height: 100%;
+        width: 100%;
+    }
+
+    body {
+        height: 100%;
+        width: 100%;
+    }
+
+    .container {
+        background: #0a3818ff;
+        color: #fff;
+        font-family: sans-serif;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .main {
+        height: 50%;
+        width: 40%;
+    }
+
+    .box {
+        margin: 50px auto;
+        height: 50%;
+        width: 50%;
+        background: #fff;
+        border: 2px solid rebeccapurple;
+        border-radius: 14px;
+    }
+
+    .btns {
+        margin: 50px auto;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #start,
+    #stop {
+        margin: 5px 25px;
+        height: 50px;
+        border: none;
+        width: 135px;
+        color: #fff;
+        font-weight: bold;
+        letter-spacing: 2px;
+        background: rgb(67, 192, 242);
+        border-radius: 8px;
+        font-size: 24px;
+        cursor: pointer;
+    }
+    #start:hover,#stop:hover{
+            background: rgb(131, 210, 241);
+    }
+    #start:active,#stop:active{
+            background:#fff;
+            color:  rgb(131, 210, 241);
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="main">
+            <div class="box"></div>
+            <div class="btns">
+                <button id="start">Start</button>
+                <button id="stop">Stop</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    let box = document.querySelector('.box')
+    let start = document.querySelector('#start')
+    let stop = document.querySelector('#stop')
+    let bg_interval;
+
+    function random_color() {
+        let hex = '0123456789ABCDEF'
+        let color = '#'
+        for (let i = 0; i < 6; i++) {
+            color += hex[Math.floor(Math.random() * 16)];
+        }
+        return color
+    }
+    let change_bg = function () {
+        if (!bg_interval) {
+            bg_interval = setInterval(() => {
+                box.style.backgroundColor = random_color()
+            }, 1000)
+        }
+
+    }
+    start.addEventListener('click', change_bg)
+    stop.addEventListener('click', () => {
+        clearInterval(bg_interval)
+        bg_interval = null
+    })
+</script>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p></p>
+</body>
+<script>
+    // const path = 'C:/Users/Lenovo/Desktop/Summer'
+    const path = '../'
+
+    async function request(path) {
+        const a = await fetch(path)
+        // const data = a.json()
+        const data = a.text()
+        return data
+    }
+
+    let response = request(path)
+    response.then((text)=>{
+        // console.log(text);
+        // document.querySelector('p').innerHTML= text
+        document.querySelector('p').innerText= text
+    }).catch((e)=>{
+        // console.log(e);
+        document.querySelector('p').innerHTML= `ERROR ENCOUNTERED -> ${e}`
+    })
+    
+
+</script>
+
+</html>

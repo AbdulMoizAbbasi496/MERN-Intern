@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Hammad",
+    "department": "BSDS",
+    "reg_no": "FA23-BDS-054"
+  },
+  {
+    "name": "Abdul Bari",
+    "department": "BSSE",
+    "reg_no": "FA23-BSE-045"
+  },
+  {
+    "name": "Abdul Moiz Abbasi",
+    "department": "BSAI",
+    "reg_no": "FA23-BAI-001"
+  },
+  {
+    "name": "abc",
+    "department": "BSCS",
+    "reg_no": "FA23-BAI-056"
+  }
+]
